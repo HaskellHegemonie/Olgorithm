@@ -21,13 +21,13 @@ pad f padding x xs = case f of
     dist = max 0 $ x + n l
     pad = replicate dist padding
 
-data Padding = Front | Back 
+data Padding = Front | Back
 encode :: String -> String
 encode = concatMap convert
   . chunksOf 8
   . map (pad Back '0' 5)
   . chunksOf 5
-  . concatMap (pad Front '0' 8 . flip showBin "" . fromEnum) 
+  . concatMap (pad Front '0' 8 . flip showBin "" . fromEnum)
   where
     table = listArray (0, 32) $ ['A'..'Z'] <> ['2'..'7'] <> paddingStr
     convert xs = concatMap (map ((table !) . fst) . readBin) $ (pad Back (showBin padding "") 8) xs

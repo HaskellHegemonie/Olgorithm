@@ -7,6 +7,7 @@ import B32 qualified
 import B64 qualified
 import Hex qualified
 import Morse qualified
+import Hubsi qualified
 
 main = join $ execParser (info commandParser $ progDesc "Olgorithm")
 
@@ -30,6 +31,9 @@ commandParser =
   <|> subparser (command "morse"  (info (inpMorse <$> argument str idm) $ progDesc "Morse Encode"))
   <|> subparser (command "morsd"  (info (inpMorsd <$> argument str idm) $ progDesc "Morse Decode"))
 
+  <|> subparser (command "hubse"  (info (inpHubse <$> argument str idm) $ progDesc "Hubsi Encode"))
+  <|> subparser (command "hubsd"  (info (inpHubsd <$> argument str idm) $ progDesc "Hubsi Decode [many to one :-(]"))
+
 
 p = printf "\"%s\"\n"
 
@@ -49,3 +53,6 @@ inpEBase64 = p . B64.encode
 
 inpMorse = p . Morse.morse
 inpMorsd = p . Morse.morsd
+
+inpHubse = p . Hubsi.hubse
+inpHubsd = p . Hubsi.hubsd

@@ -1,0 +1,34 @@
+#+title: Olgorithm
+#+author: HaskellHegemonie
+#+date: 2025-01-12
+#+options: \n:t
+
+#+begin_src sh
+  olgorithm hubse algorithm
+#+end_src
+* Subcommands
+** List
+id
+rev
+revd
+hexe
+hexd
+b32e
+b32d
+b64e
+morse
+morsd
+hubse
+hubsd
+** Morsd
+When decrypting morse code: Make sure to put the argument behind two dashes (--).
+Otherwise the shell might interpret them as command line options.
+*** Example
+#+begin_src sh
+  olgorithm morse "haskell"
+  => "..../.-/.../-.-/./.-../.-.."
+
+  olgorithm morsd -- "..../.-/.../-.-/./.-../.-.."
+  => "haskell"
+#+end_src
+

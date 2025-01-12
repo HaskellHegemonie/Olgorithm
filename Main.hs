@@ -6,6 +6,7 @@ import Control.Monad
 import B32 qualified
 import B64 qualified
 import Hex qualified
+import Morse qualified
 
 main = join $ execParser (info commandParser $ progDesc "Olgorithm")
 
@@ -26,6 +27,9 @@ commandParser =
   <|> subparser (command "b64e"  (info (inpEBase64 <$> argument str idm) $ progDesc "Base64 Encode"))
   -- <|> subparser (command "db64"  (info (inpEBase64 <$> argument str idm) $ progDesc "Base64 Decode"))
 
+  <|> subparser (command "morse"  (info (inpMorse <$> argument str idm) $ progDesc "Morse Encode"))
+  <|> subparser (command "morsd"  (info (inpMorsd <$> argument str idm) $ progDesc "Morse Decode"))
+
 
 p = printf "\"%s\"\n"
 
@@ -42,3 +46,6 @@ inpDBase32 = p . B32.decode
 
 inpEBase64 = p . B64.encode
 -- inpDBase64 = p . B64.decode
+
+inpMorse = p . Morse.morse
+inpMorsd = p . Morse.morsd
